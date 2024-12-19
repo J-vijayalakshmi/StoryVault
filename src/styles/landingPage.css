@@ -1,0 +1,68 @@
+
+.landing-page {
+    position: relative;
+    height: 100vh;
+    background: url('https://images.deepai.org/art-image/934df7e496ed4e9496d46f1bf977c31a/i-need-a-background-that-has-coverpages-of-al_0MkrCl5.jpg') no-repeat center center fixed;
+    background-size: cover;
+  }
+  
+  .overlay {
+    text-align: center;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    /* Semi-transparent background for readability */
+    padding: 100px;
+    padding-top: 200px;
+    border-radius: 10px;
+  }
+  
+  .title {
+    font-family: 'Playfair Display', serif;
+    color: var(--main-text-colour);
+    font-size: 10rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  
+  .caption {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2rem;
+    margin: 10px 0;
+  }
+  
+  .title {
+    opacity: 0;
+    animation: fadeIn 3s forwards;
+  }
+  
+  @keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+  }
+  
+  .buttons {
+    margin-top: 20px;
+  }
+  
+  .btn {
+    font-size: 1rem;
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: var(--background-color);
+  }
+  
+  .read-btn {
+    background-color: var(--main-text-colour);
+    color: var(--primary-colour);
+  }
+  
+  .write-btn {
+    background-color: var(--primary-colour);
+    color: var(--main-text-colour);
+  }

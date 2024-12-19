@@ -1,38 +1,63 @@
-.App {
-  text-align: center;
+
+* {
+  font-style: italic;
+  /* Keep the italic style for all elements */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;  
+  /* Keep the default sans-serif font */
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+:root {
+  --main-text-colour: #f47e03;
+  /* Bright orange */
+  --background-color: #d2bb9f;
+  /* Light background */
+  --primary-colour: #000000;
+  /* Black for header and buttons */
+  --secondary-colour: #ece0ca;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+main {
+  height: 100vh;
+  background-color: var(--background-color);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Header styles */
+header {
+  background-color: var(--primary-colour);
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+/* Heading styles */
+.heading {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.heading h1 {
+  margin-left: 20px;
+  font-size: 3rem;
+  color: var(--main-text-colour);
+  /* Orange text */
+  text-align: left;
+  transition: color 0.3s ease;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.sub-title {
+  font-size: 0.5rem;
+  color: var(--secondary-colour);
 }
+
+.heading h1:hover {
+  cursor: pointer;
+  color: #ffa94d;
+  /* Lighter orange on hover */
+}
+
