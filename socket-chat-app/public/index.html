@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socket.io Chat</title>
+    <style>
+        ul { list-style-type: none; padding: 0; }
+        li { padding: 8px; }
+        input { padding: 10px; width: 300px; }
+        button { padding: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Socket.io Chat</h1>
+    
+    <!-- Section to display messages -->
+    <ul id="messages"></ul>
+
+    <!-- Form for sending a message -->
+    <form id="form">
+        <input id="input" autocomplete="off" placeholder="Enter message..." />
+        <button>Send</button>
+    </form>
+
+    <div>
+        <!-- Username input for setting a username -->
+        <input id="username" placeholder="Enter your username" />
+        <button id="setUsername">Set Username</button>
+    </div>
+
+    <div>
+        <!-- Private message inputs -->
+        <input id="privateUser" placeholder="Enter recipient username" />
+        <input id="privateMessage" placeholder="Enter private message" />
+        <button id="sendPrivateMessage">Send Private Message</button>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io();
+
+        // Set the username when the user clicks the 'Set Username' button
+        document.getElementById('setUsername').addEventListener('click', function() {
+            const username = document.getElementById('username').value;
+            if (username) {
+                socket.emit('set username', username);
+                alert(`Username set to ${username}`);
+            }
+        });
+
+        // Listen for general chat messages
+        socket.on('chat message', function(msg){
+            var li = document.createElement('li');
+            li.textContent = msg;
+            document.getElementById('messages').appendChild(li);
+        });
+
+        // Listen for private messages
+        socket.on('private message', function(data){
+            var li = document.createElement('li');
+            li.style.color = 'green';
+            li.textContent = `Private message from ${data.from}: ${data.message}`;
+            document.getElementById('messages').appendChild(li);
+        });
+
+        // Send a regular chat message
+        document.getElementById('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var input = document.getElementById('input');
+            socket.emit('chat message', input.value);
+            input.value = '';
+        });
+
+        // Send a private message
+        document.getElementById('sendPrivateMessage').addEventListener('click', function() {
+            const recipient = document.getElementById('privateUser').value;
+            const message = document.getElementById('privateMessage').value;
+            if (recipient && message) {
+                socket.emit('private message', { to: recipient, message: message });
+                document.getElementById('privateMessage').value = ''; // Clear the input
+            }
+        });
+    </script>
+</body>
+</html>
