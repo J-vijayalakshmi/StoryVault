@@ -1,0 +1,172 @@
+.nav {
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    gap: 20px;
+  }
+  
+  .nav input {
+    width: 300px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: var(--background-color);
+    color: #201e1e;
+    /* Dark text for input */
+    padding-left: 20px;
+    border: 1px solid #dcdcdc;
+    outline: none;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .nav input::placeholder {
+    color: #263e4d;
+    /* Placeholder color */
+  }
+  
+  .nav input:focus {
+    background-color: #ffffff;
+    box-shadow: 0 0 8px rgba(44, 62, 80, 0.2);
+    /* Focus shadow effect */
+  }
+  
+  /* Image button styles */
+  .nav img {
+    padding-top: 10px;
+    width: 60px;
+    height: 65px;
+    transition: transform 0.3s ease;
+  }
+  
+  .nav img:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+    /* Slight zoom on hover */
+  }
+  
+  .nav img:active {
+    transform: scale(0.9);
+    /* Scale down on active */
+  }
+  
+  header {
+    background-color: var(--primary-colour);
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+  }
+  
+  .heading {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .heading h1 {
+    margin: 0;
+    font-size: 3rem;
+    font-family: myFirstFont;
+    color: var(--main-text-colour);
+    transition: color 0.3s ease;
+  }
+  
+  .heading p {
+    padding-left: 40px;
+    font-size: 0.8rem;
+    color: var(--main-text-colour);
+  }
+  
+  .heading h1:hover {
+    cursor: pointer;
+    color: #df8628;
+    /* Lighter orange on hover */
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .ips {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+  }
+  
+  .ips input {
+    width: 300px;
+    height: 40px;
+    border-radius: 20px;
+    padding: 0 20px;
+    font-size: 1rem;
+    color: #333;
+    background-color: #f9f9f9;
+    border: 2px solid #ddd;
+    outline: none;
+    transition: all 0.3s ease;
+  }
+  
+  .ips input::placeholder {
+    color: #aaa;
+    font-style: italic;
+  }
+  
+  .ips input:focus {
+    border-color: var(--main-text-colour);
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .ips button {
+    position: absolute;
+    right: 10px;
+    top: 40%;
+    transform: translateY(-50%);
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    outline: none;
+  }
+  
+  .ips button img {
+    width: 40px;
+    height: 50px;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+  }
+  
+  .ips button:hover img {
+    opacity: 1;
+  }
+  
+  /* User Icon */
+  .nav img {
+    width: 60px;
+    height: 60px;
+    transition: transform 0.3s ease;
+  }
+  
+  .nav img:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+  }
+  
+  .nav img:active {
+    transform: scale(0.9);
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 600px) {
+    .nav {
+      flex-direction: column;
+      gap: 10px;
+    }
+  
+    .ips input {
+      width: 100%;
+    }
+  }

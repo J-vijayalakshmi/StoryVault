@@ -1,0 +1,125 @@
+
+#genere {
+    display: flex;
+    margin-bottom: 0px;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  /* In your CSS file, for example app.css or any custom CSS file */
+  #genere {
+    overflow-y: auto; /* Enable vertical scrolling */
+    height: 520px ;    /* Set a height for the container */
+  }
+  
+  #genere::-webkit-scrollbar {
+    width: 20px; /* Width of the scrollbar */
+  }
+  
+  #genere::-webkit-scrollbar-thumb {
+    background-color: var(--background-color); /* Scrollbar color */
+    border-radius: 10px;        /* Rounded scrollbar edges */
+  }
+  
+  #genere::-webkit-scrollbar-track {
+    background: var(--primary-colour); /* Scrollbar track color */
+  }
+  
+  #genere-heading {
+    font-size: 2rem;
+    color: var(--main-text-colour);
+    align-items: center;
+    font-weight: bold;
+  }
+  
+  
+  /* src/components/GenereItem.css */
+  .genre-card {
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    margin: 10px;
+    padding: 20px;
+    padding: 16px;
+    text-align: center;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    box-shadow: 0 4px 8px #00000033;
+  }
+  
+  .genre-card:hover {
+    transform: scale(1.1);
+    /* Enlarge the card on hover */
+    background-color: var(--main-text-colour);
+    /* Change background color on hover */
+    cursor: pointer;
+  }
+  
+  /* src/App.css */
+  
+  #genere {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #f4f4f4;
+    /* Light background */
+  }
+  
+  #genere-heading {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  #genere-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    /* Responsive grid */
+    gap: 20px;
+    /* Space between buttons */
+    width: 100%;
+    max-width: 800px;
+  }
+  
+  .genere-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    text-decoration: none;
+    background-color: var(--background-color);
+    /* Primary blue */
+    color: #000000;
+    font-size: 1.2rem;
+    font-weight: 500;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow */
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .genere-button:hover {
+    background-color: var(--main-text-colour);
+    /* Darker blue on hover */
+    transform: translateY(-2px);
+    /* Lift effect on hover */
+  }
+  
+  .genere-button:active {
+    background-color: #004080;
+    /* Even darker on click */
+    transform: translateY(0);
+    /* Reset on click */
+  }
+  
+  @media (max-width: 600px) {
+    #genere-heading {
+      font-size: 1.5rem;
+    }
+  
+    .genere-button {
+      font-size: 1rem;
+      padding: 8px 16px;
+    }
+  }
