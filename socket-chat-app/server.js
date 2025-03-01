@@ -1,52 +1,58 @@
 const express = require('express');
 const http = require('http');
 const socketIo = require('socket.io');
+const mongoose = require('mongoose');
 
-// Initialize the app and the server
 const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
 
-// Store users and their socket IDs
-let users = {};
+mongoose.connect('your_mongodb_atlas_connection_string', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}).then(() => console.log('✅ MongoDB Connected'))
+  .catch(err => console.error('❌ MongoDB Connection Error:', err));
 
-// Serve static files from the 'public' directory
-app.use(express.static('public'));
-
-// Route to serve the main page
-app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/public/index.html');
+const messageSchema = new mongoose.Schema({
+    sender: { type: String, required: true },
+    recipient: { type: String, required: true },
+    message: { type: String, required: true },
+    timestamp: { type: Date, default: Date.now }
 });
 
-// When a user connects to the server
-io.on('connection', (socket) => {
-    console.log('A user connected: ' + socket.id);
+const Message = mongoose.model('Message', messageSchema);
 
-    // Listen for a 'set username' event to associate a username with the socket
+let users = {};
+
+io.on('connection', (socket) => {
+    console.log('A user connected:', socket.id);
+
     socket.on('set username', (username) => {
-        users[username] = socket.id; // Map username to socket.id
+        users[username] = socket.id;
         console.log(`User ${username} connected with socket ID ${socket.id}`);
     });
 
-    // Listen for private messages
-    socket.on('private message', (data) => {
-        const { to, message } = data;
-        const recipientSocketId = users[to];
+    socket.on('private message', async (data) => {
+        const { sender, recipient, message } = data;
+        
+        const newMessage = new Message({ sender, recipient, message });
+        await newMessage.save(); // Store in MongoDB
+        
+        const recipientSocketId = users[recipient];
         if (recipientSocketId) {
-            io.to(recipientSocketId).emit('private message', {
-                from: socket.id,
-                message: message
-            });
-            console.log(`Private message from ${socket.id} to ${to}`);
-        } else {
-            console.log(`User ${to} not found`);
+            io.to(recipientSocketId).emit('private message', { from: sender, message });
         }
     });
 
-    // When the user disconnects
+    socket.on('fetch messages', async (username) => {
+        const messages = await Message.find({
+            $or: [{ sender: username }, { recipient: username }]
+        }).sort({ timestamp: 1 });
+
+        socket.emit('chat history', messages);
+    });
+
     socket.on('disconnect', () => {
-        console.log('User disconnected: ' + socket.id);
-        // Remove user from the users map when they disconnect
         for (const [username, id] of Object.entries(users)) {
             if (id === socket.id) {
                 delete users[username];
@@ -57,8 +63,6 @@ io.on('connection', (socket) => {
     });
 });
 
-// Start the server
 server.listen(3000, () => {
     console.log('Server is running on http://localhost:3000');
 });
-
